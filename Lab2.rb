@@ -11,5 +11,17 @@ hello = HelloWorldClass.new("Connor")
 hello.sayHi
 
 def palindrome?(string)
-	return string == string.reverse
+	string1 = string.gsub(/[,.- ]/, "").downcase
+	return string1 == string1.reverse
+end
+
+puts palindrome?("racecar")
+
+def rps_game_winner(players)
+	if(players.length != 2)
+		raise WrongNumberOfPlayersError
+	end
+	if players[0]
+		
+	end
 end
