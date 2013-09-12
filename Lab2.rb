@@ -7,5 +7,5 @@ class HelloWorldClass
 		puts "Hello #{@name}!"
 	end
 end
-hellow = HelloWorldClass.new("{type your name here}")
+hello = HelloWorldClass.new("Connor")
 hello.sayHi
