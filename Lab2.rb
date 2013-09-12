@@ -25,3 +25,13 @@ def rps_game_winner(players)
 		
 	end
 end
+
+def count_words(string)
+	string1   = string.gsub(/[^a-zA-Z\s]/, "").downcase
+	wordArray = string1.split
+	wordHash  = Hash.new(0)
+	wordArray.each {|x| wordHash[x]+=1}
+	return wordHash
+end
+
+puts count_words("A man, a plan, a canal -- Panama")
