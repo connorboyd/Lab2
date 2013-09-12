@@ -17,14 +17,7 @@ end
 
 puts palindrome?("racecar")
 
-def rps_game_winner(players)
-	if(players.length != 2)
-		raise WrongNumberOfPlayersError
-	end
-	if players[0]
-		
-	end
-end
+
 
 def count_words(string)
 	string1   = string.gsub(/[^a-zA-Z\s]/, "").downcase
@@ -35,3 +28,31 @@ def count_words(string)
 end
 
 puts count_words("A man, a plan, a canal -- Panama")
+
+
+
+class WrongNumberOfPlayersError <  StandardError ; end
+class NoSuchStrategyError 		<  StandardError ; end
+
+def doesFirstWin(first, second)
+	if first == second
+		return true
+	end
+	if first == "r"
+		return second == "s"
+	end
+	if first == "p"
+		return second == "r"
+	end
+	if first == "s"
+		return second == "p"
+	end
+end
+
+
+def rps_game_winner(game)
+	raise WrongNumberOfPlayersError unless game.length == 2
+	validStrategies = ["r","p","s"]
+	raise NoSuchStrategyError unless validStrategies.include?(game[0][1].downcase) && validStrategies.include?(game[1][1].downcase)
+
+end
