@@ -11,7 +11,7 @@ hello = HelloWorldClass.new("Connor")
 hello.sayHi
 
 def palindrome?(string)
-	string1 = string.gsub(/[,.- ]/, "").downcase
+	string1 = string.gsub(/[^a-zA-Z]/, "").downcase
 	return string1 == string1.reverse
 end
 
