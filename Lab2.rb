@@ -9,3 +9,7 @@ class HelloWorldClass
 end
 hello = HelloWorldClass.new("Connor")
 hello.sayHi
+
+def palindrome?(string)
+	return string == string.reverse
+end
