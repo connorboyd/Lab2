@@ -8,6 +8,7 @@ class HelloWorldClass
 	end
 end
 hello = HelloWorldClass.new("Connor")
+puts "Hello World:"
 hello.sayHi
 
 def palindrome?(string)
@@ -15,6 +16,7 @@ def palindrome?(string)
 	return string1 == string1.reverse
 end
 
+puts "\nPalindrome:"
 puts palindrome?("racecar")
 
 
@@ -27,6 +29,7 @@ def count_words(string)
 	return wordHash
 end
 
+puts "\nCount Words:"
 puts count_words("A man, a plan, a canal -- Panama")
 
 
@@ -61,7 +64,8 @@ def rps_game_winner(game)
 	end
 end
 
-#puts rps_game_winner([ ["Armando", "P"], ["Dave", "S"] ])
+puts "\nGame:"
+puts rps_game_winner([ ["Armando", "P"], ["Dave", "S"] ])
 #puts rps_game_winner([ ["Allen", "S"],   ["Omer", "P"] ])
 
 
@@ -85,7 +89,30 @@ testTournament = [
         [ ["David E.", "R"], ["Richard X.", "P"] ]
     ]
 ]
-
+puts "\nTournament:"
 puts rps_tournament_winner(testTournament)
+
+def combine_anagrams(words)
+	arrayOfAnagrams = Array.new()
+	words.each do |thisWord|
+		temp = []
+		words.each do |nextWord|
+			if (thisWord.downcase.split(//).sort == nextWord.downcase.split(//).sort)
+				temp.push(nextWord)
+			end
+		end
+		arrayOfAnagrams.push(temp)
+	end
+	return arrayOfAnagrams.uniq
+
+end
+
+puts "\nCombine Anagrams:"
+puts combine_anagrams(['cars', 'for', 'potatoes', 'racs', 'four', 'scar', 'creams', 'scream'])
+
+
+
+
+
 
 
