@@ -54,5 +54,11 @@ def rps_game_winner(game)
 	raise WrongNumberOfPlayersError unless game.length == 2
 	validStrategies = ["r","p","s"]
 	raise NoSuchStrategyError unless validStrategies.include?(game[0][1].downcase) && validStrategies.include?(game[1][1].downcase)
-
+	if(doesFirstWin(game[0][1],game[1][1]))
+		return game[0]
+	else
+		return game[1]
+	end
 end
+
+puts rps_game_winner([ ["Armando", "P"], ["Dave", "S"] ])
