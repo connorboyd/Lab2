@@ -103,7 +103,8 @@ def combine_anagrams(words)
 		end
 		arrayOfAnagrams.push(temp)
 	end
-	return arrayOfAnagrams.uniq
+	uniqueArray = arrayOfAnagrams.uniq
+	return uniqueArray
 
 end
 
