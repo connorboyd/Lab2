@@ -54,11 +54,38 @@ def rps_game_winner(game)
 	raise WrongNumberOfPlayersError unless game.length == 2
 	validStrategies = ["r","p","s"]
 	raise NoSuchStrategyError unless validStrategies.include?(game[0][1].downcase) && validStrategies.include?(game[1][1].downcase)
-	if(doesFirstWin(game[0][1],game[1][1]))
+	if(doesFirstWin(game[0][1].downcase,game[1][1].downcase))
 		return game[0]
 	else
 		return game[1]
 	end
 end
 
-puts rps_game_winner([ ["Armando", "P"], ["Dave", "S"] ])
+#puts rps_game_winner([ ["Armando", "P"], ["Dave", "S"] ])
+#puts rps_game_winner([ ["Allen", "S"],   ["Omer", "P"] ])
+
+
+def rps_tournament_winner(tournament)
+	if(tournament[0][1].class == String)	#Bottom of bracket. One RPS game
+		return rps_game_winner(tournament)
+	else
+		oneSide   = rps_tournament_winner(tournament[0])
+		otherSide = rps_tournament_winner(tournament[1])
+		return rps_tournament_winner([oneSide, otherSide])
+	end
+end
+
+testTournament = [
+    [
+        [ ["Armando", "P"], ["Dave", "S"] ],
+        [ ["Richard", "R"],  ["Michael", "S"] ],
+    ],
+    [
+        [ ["Allen", "S"], ["Omer", "P"] ],
+        [ ["David E.", "R"], ["Richard X.", "P"] ]
+    ]
+]
+
+puts rps_tournament_winner(testTournament)
+
+
