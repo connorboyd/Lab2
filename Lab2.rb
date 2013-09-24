@@ -180,10 +180,71 @@ p f.bar_history # => if your code works, should be [nil, 1, 2]
 p f.bar_history.instance_of?(Array)
 
 
+class Numeric
+	@@currencies = {'yen' => 0.013, 'euro' => 1.292, 'rupee' => 0.019, 'dollar' => 1}
+	def method_missing(method_id)
+		singular_currency = method_id.to_s.gsub( /s$/, '')
+		if @@currencies.has_key?(singular_currency)
+			self * @@currencies[singular_currency]
+		else
+			super
+		end
+	end
+
+	def in(otherCurrency)
+		withoutS = otherCurrency.to_s.gsub( /s$/, '')
+		if(@@currencies.has_key?(withoutS))
+			return self / @@currencies[withoutS]
+		end
+
+	end
+
+end
+
+p 20.dollars.in(:euros)
+p 20.euros.in(:rupees)
+p 20.euro.in(:yen)
+
+
+class String
+	def palindrome?
+		string1 = self.gsub(/[^a-zA-Z]/, "").downcase
+		return string1 == string1.reverse
+	end
+end
+
+
+p "racecar".palindrome?
+
+module Enumerable
+
+	def palindrome?
+		return self == self.reverse
+	end
+end
+
+
+p [1,2,3,4,3,2,1].palindrome?
 
 
 
 
+class CartesianProduct
+    include Enumerable
+    # Your code here
+end
+Example test cases:
+
+c = CartesianProduct.new([:a,:b], [4,5])
+c.each { |elt| puts elt.inspect }
+# [:a, 4]
+# [:a, 5]
+# [:b, 4]
+# [:b, 5]
+
+c = CartesianProduct.new([:a,:b], [])
+c.each { |elt| puts elt.inspect }
+# Nothing printed since Cartesian product of anything with an empty collection is empty
 
 
 
