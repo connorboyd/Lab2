@@ -56,7 +56,7 @@ end
 def rps_game_winner(game)
 	raise WrongNumberOfPlayersError unless game.length == 2
 	validStrategies = ["r","p","s"]
-	raise NoSuchStrategyError unless validStrategies.include?(game[0][1].downcase) && validStrategies.include?(game[1][1].downcase)
+	raise NoSuchStrategyError unless validStrategies.include?(game[0][1].downcase)&&validStrategies.include?(game[1][1].downcase)
 	if(doesFirstWin(game[0][1].downcase,game[1][1].downcase))
 		return game[0]
 	else
@@ -231,9 +231,21 @@ p [1,2,3,4,3,2,1].palindrome?
 
 class CartesianProduct
     include Enumerable
-    # Your code here
-end
-Example test cases:
+
+    def initialize(sequence1, sequence2)
+    	@sequence1 = sequence1
+    	@sequence2 = sequence2
+    end
+
+    def each
+    	@sequence1.each do |x|
+    		@sequence2.each do |y|
+    			yield [x,y]
+    		end
+    	end
+    end
+ end
+#Example test cases:
 
 c = CartesianProduct.new([:a,:b], [4,5])
 c.each { |elt| puts elt.inspect }
@@ -245,13 +257,3 @@ c.each { |elt| puts elt.inspect }
 c = CartesianProduct.new([:a,:b], [])
 c.each { |elt| puts elt.inspect }
 # Nothing printed since Cartesian product of anything with an empty collection is empty
-
-
-
-
-
-
-
-
-
-
