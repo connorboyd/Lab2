@@ -8,7 +8,7 @@ class HelloWorldClass
 	end
 end
 hello = HelloWorldClass.new("Connor")
-puts "Hello World:"
+p "Hello World:"
 hello.sayHi
 
 def palindrome?(string)
@@ -16,8 +16,8 @@ def palindrome?(string)
 	return string1 == string1.reverse
 end
 
-puts "\nPalindrome:"
-puts palindrome?("racecar")
+p "Palindrome:"
+p palindrome?("racecar")
 
 
 
@@ -29,8 +29,8 @@ def count_words(string)
 	return wordHash
 end
 
-puts "\nCount Words:"
-puts count_words("A man, a plan, a canal -- Panama")
+p "Count Words:"
+p count_words("A man, a plan, a canal -- Panama")
 
 
 
@@ -64,9 +64,9 @@ def rps_game_winner(game)
 	end
 end
 
-puts "\nGame:"
-puts rps_game_winner([ ["Armando", "P"], ["Dave", "S"] ])
-#puts rps_game_winner([ ["Allen", "S"],   ["Omer", "P"] ])
+p "Game:"
+p rps_game_winner([ ["Armando", "P"], ["Dave", "S"] ])
+#p rps_game_winner([ ["Allen", "S"],   ["Omer", "P"] ])
 
 
 def rps_tournament_winner(tournament)
@@ -80,17 +80,17 @@ def rps_tournament_winner(tournament)
 end
 
 testTournament = [
-    [
-        [ ["Armando", "P"], ["Dave", "S"] ],
-        [ ["Richard", "R"],  ["Michael", "S"] ],
-    ],
-    [
-        [ ["Allen", "S"], ["Omer", "P"] ],
-        [ ["David E.", "R"], ["Richard X.", "P"] ]
-    ]
+	[
+		[ ["Armando", "P"], ["Dave", "S"] ],
+		[ ["Richard", "R"],  ["Michael", "S"] ],
+	],
+	[
+		[ ["Allen", "S"], ["Omer", "P"] ],
+		[ ["David E.", "R"], ["Richard X.", "P"] ]
+	]
 ]
-puts "\nTournament:"
-puts rps_tournament_winner(testTournament)
+p "Tournament:"
+p rps_tournament_winner(testTournament)
 
 def combine_anagrams(words)
 	arrayOfAnagrams = Array.new()
@@ -108,8 +108,85 @@ def combine_anagrams(words)
 
 end
 
-puts "\nCombine Anagrams:"
-puts combine_anagrams(['cars', 'for', 'potatoes', 'racs', 'four', 'scar', 'creams', 'scream'])
+p "Combine Anagrams:"
+p combine_anagrams(['cars', 'for', 'potatoes', 'racs', 'four', 'scar', 'creams', 'scream'])
+
+#Todo: Getters and setters
+
+class Dessert
+	def initialize(name, calories)
+		@name     = name
+		@calories = calories
+	end
+
+	def healthy?
+		@calories < 200
+	end
+
+	def delicious?
+		true	#All desserts are delicious 
+	end
+end
+
+class JellyBean < Dessert
+	def initialize(name, calories, flavor)
+		super(name, calories)
+		@flavor = flavor
+	end
+
+	def delicious?
+		return @flavor != "black licorice"
+	end
+end
+
+dessert1 = Dessert.new("Cake",299)
+p dessert1.healthy?
+
+jellybean = JellyBean.new("Jeffrey", 199, "white licorice")
+p jellybean.healthy?
+
+
+
+
+class Class
+	def attr_accessor_with_history(attr_name)
+		attr_name = attr_name.to_s       # make sure it's a string
+		attr_reader attr_name            # create the attribute's getter
+		attr_reader attr_name+"_history" # create bar_history getter
+		class_eval %Q{ 
+			def #{attr_name}=(attr_name)	#Set the attribute
+				@attr_name = attr_name
+				if @#{attr_name}_history	#If the history array already exists, add the attribute to the end
+					@#{attr_name}_history << attr_name 
+				else 	#Array is not initialized
+					@#{attr_name}_history =  Array.new 	#Initialize array
+					@#{attr_name}_history << nil		#Add nil to the array
+					@#{attr_name}_history << attr_name	#Append the variable to the array
+				end 
+			end
+		}
+	end
+end
+
+class Foo
+	attr_accessor_with_history :bar
+end
+
+p f = Foo.new
+p f.bar = 1
+p f.bar = 2
+p f.bar_history # => if your code works, should be [nil, 1, 2]
+
+p f.bar_history.instance_of?(Array)
+
+
+
+
+
+
+
+
+
 
 
 
